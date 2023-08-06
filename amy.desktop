@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Amy Text-to-speech
+GenericName=TTS
+Comment=A simple text to speech engine using piper-tts
+Icon=~/ssd/flatpak-hw/org.alaska.piper
+Exec=org.alaska.piper --gui
+Terminal=false
+Categories=System
