@@ -11,10 +11,10 @@
 </h1>
 <p align="center">
   <a href="https://github.com/sweetbbak/moe-flatpaks/releases">
-  <img alt="Static Badge" src="https://img.shields.io/badge/flathub_flatpak-purple">
+  <img alt="Static Badge" src="https://img.shields.io/badge/flathub_flatpak-blue">
   </a>
   <a href="https://github.com/sweetbbak/moe-flatpaks/releases">
-  <img alt="Static Badge" src="https://img.shields.io/badge/This_means_nothing-blue">
+  <img alt="Static Badge" src="https://img.shields.io/badge/This_means_nothing-green">
   </a>
   <br>
   <br>
