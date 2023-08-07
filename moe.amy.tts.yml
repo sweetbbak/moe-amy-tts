@@ -22,7 +22,6 @@ modules:
       path: moe.amy.tts.desktop
     buildsystem: simple
     build-commands:
-      # - mkdir -p /app/share/applications
       - install -Dm755 moe.amy.tts.desktop /app/share/applications/moe.amy.tts.desktop
 
   - name: icon
@@ -33,17 +32,7 @@ modules:
       path: moe.amy.tts.png
     buildsystem: simple
     build-commands:
-      # - mkdir -p /app/share/icons/hicolor/128x128/app
       - install -Dm644 amy.png /app/share/icons/hicolor/128x128/app/moe.amy.tts.png
-
-  # - name: meta
-  #   sources:
-  #   - type: file
-  #     path: moe.amy.tts.metainfo.xml
-  #   buildsystem: simple
-  #   build-commands:
-  #     # - mkdir -p /app/share/metainfo
-  #     - install -Dm755 moe.amy.tts.metainfo.xml  /app/share/metainfo/moe.amy.tts.metainfo.xml
 
   - name: run.sh
     sources:
