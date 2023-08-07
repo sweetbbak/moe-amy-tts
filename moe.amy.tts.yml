@@ -7,7 +7,6 @@ modules:
   - name: piper
     buildsystem: simple
     build-commands:
-      # - mv * /app/
       - mkdir -p /app/bin
       - ln -s /app/piper /app/bin/piper
     sources:
@@ -15,34 +14,36 @@ modules:
         url: https://github.com/rhasspy/piper/releases/download/v1.2.0/piper_amd64.tar.gz
         sha256: 467c17935d2a22dcce9dc9e08ba07485e29be813097e7cf08c5627aa09d32e42
 
-  # - name: metainfo
-  #   sources:
-  #   - type: file
-  #     path: moe.amy.tts.metainfo.xml
-  #   - type: file
-  #     path: moe.amy.tts.desktop
-  #   - type: file
-  #     path: moe.amy.tts.png
-  #   buildsystem: simple
-  #   build-commands:
-  #     - mkdir -p /app/share/metainfo
-  #     - mkdir -p /app/share/applications
-  #     - mkdir -p /app/share/icons/hicolor/128x128/app
-  #     - install -m644 moe.amy.tts.metainfo.xml  /app/share/metainfo/moe.amy.tts.metainfo.xml
-  #     - install -m644 moe.amy.tts.desktop /app/share/applications
-  #     - install -m644 moe.amy.tts.png /app/share/icons/hicolor/128x128/app
-
   - name: desktop
     sources:
     - type: file
       path: moe.amy.tts.desktop
     - type: file
+      path: moe.amy.tts.desktop
+    buildsystem: simple
+    build-commands:
+      # - mkdir -p /app/share/applications
+      - install -Dm755 moe.amy.tts.desktop /app/share/applications/moe.amy.tts.desktop
+
+  - name: icon
+    sources:
+    - type: file
+      path: amy.png
+    - type: file
       path: moe.amy.tts.png
+    buildsystem: simple
+    build-commands:
+      # - mkdir -p /app/share/icons/hicolor/128x128/app
+      - install -Dm644 amy.png /app/share/icons/hicolor/128x128/app/moe.amy.tts.png
+
+  # - name: meta
+  #   sources:
+  #   - type: file
+  #     path: moe.amy.tts.metainfo.xml
   #   buildsystem: simple
   #   build-commands:
-  #     - mkdir -p /app/share/applications
-  #     - install -m755 moe.amy.tts.desktop /app/share/applications
-  #     # - install -m755 moe.amy.tts.png /app/share/icons/hicolor/128x128/app
+  #     # - mkdir -p /app/share/metainfo
+  #     - install -Dm755 moe.amy.tts.metainfo.xml  /app/share/metainfo/moe.amy.tts.metainfo.xml
 
   - name: run.sh
     sources:
@@ -50,7 +51,7 @@ modules:
       path: run.sh
     buildsystem: simple
     build-commands:
-      - install -m755 run.sh /app/bin/run.sh
+      - install -Dm755 run.sh /app/bin/run.sh
 
   - name: ivona
     sources:
