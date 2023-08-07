@@ -1,13 +1,11 @@
 ## Amy Text-to-speech
 
-![](moe.amy.tts.png)
-
 <h1 align="center">
   <a name="logo" href=""><img src="moe.amy.tts.png" alt="Amy text to speech logo" width="200"></a>
   <br>
   Amy Text-to-speech
   <br>
-  <a name="download button" href="https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/decky_installer.desktop"><img src="./docs/images/download_button.svg"  alt="Download decky" width="350px" style="padding-top: 15px;"></a>
+  <a name="download button" href="https://github.com/sweetbbak/moe-flatpaks/releases/latest/download/amy_installer.desktop"><img src="./assets/download_button.svg"  alt="Download amy-tts" width="350px" style="padding-top: 15px;"></a>
 </h1>
 <p align="center">
   <a href="https://github.com/sweetbbak/moe-flatpaks/releases"><img alt="Static Badge" src="https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fflathub_flatpak"></a>
