@@ -1,5 +1,5 @@
 #!/bin/bash
-# script to run the TTS models
+# script to run the TTS models outside of the flatpak environment
 # set -x
 
 version=0.1.0

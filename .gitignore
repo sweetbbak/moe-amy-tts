@@ -2,3 +2,4 @@ ignore
 .flatpak-builder
 repo
 build-dir
+build

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>moe.amy.tts</id>
+  
+  <name>Amy Text-to-speech</name>
+  <summary>Amy TTS is a text-to-speech engine that runs using minimal CPU power but doesn&apos;t sacrifice on </summary>
+  
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>MIT</project_license>
+  
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+    <control>gamepad</control>
+    <control>tablet</control>
+  </supports>
+  
+  <description>
+    <p>
+      Amy text-to-speech engine that can be used as a Speech-Dispatcher module, as a command line tool to turn text into speech, or as a simple GUI interface to write and listen to text. It&apos;s great for using with bash scripts, or turning text into an audiobook. It runs great on a rapberry Pi, Steamdeck and nearly any platform. Amy TTS is a faster than real time Text-to-speech model that runs on any and all platforms thanks to Piper text-to-speech.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">moe.amy.tts.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/sweetbbak/moe-flatpaks/blob/main/assets/screenshot.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/sweetbbak/moe-flatpaks/blob/main/assets/screenshot1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/sweetbbak/moe-flatpaks/blob/main/assets/screenshot2.png</image>
+    </screenshot>
+  </screenshots>
+</component>

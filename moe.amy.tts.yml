@@ -22,8 +22,20 @@ modules:
     buildsystem: simple
     build-commands:
       # - ls /app/share/icons/hicolor
-      - install -m755 moe.amy.tts.png /app/share/icons/hicolor/128x128/
-      - install -m755 moe.amy.tts.png /app/share/icons/hicolor/64x64/
+      - install -m755 moe.amy.tts.png /app/share/icons/hicolor/256x256/apps/moe.amy.tts.png
+      - install -m755 moe.amy.tts.png /usr/share/icons/hicolor/256x256/apps/moe.amy.tts.png
+      - install -m755 moe.amy.tts.png /app/share/icons/hicolor/128x128/apps/moe.amy.tts.png
+      - install -m755 moe.amy.tts.png /app/share/icons/hicolor/64x64/apps/moe.amy.tts.png
+
+  - name: metainfo
+    sources:
+    - type: file
+      path: moe.amy.tts.metainfo.xml
+    buildsystem: simple
+    build-commands:
+      # - ls /app/share/icons/hicolor
+      - install -m755 moe.amy.tts.metainfo.xml /usr/share/metainfo/moe.amy.tts.metainfo.xml
+      - install -m755 moe.amy.tts.metainfo.xml  /app/share/metainfo/moe.amy.tts.metainfo.xml
 
   - name: desktop
     sources:
@@ -32,6 +44,7 @@ modules:
     buildsystem: simple
     build-commands:
       - install -m755 amy.desktop /app/share/applications
+      - install -m755 amy.desktop /usr/share/applications
 
   - name: run.sh
     sources:
