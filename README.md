@@ -6,7 +6,8 @@
   Amy Text-to-speech
   <br>
   <a name="download button" href="https://github.com/sweetbbak/moe-flatpaks/releases/latest/download/amy_installer.desktop">
-  <img src="https://github.com/sweetbbak/moe-flatpaks/blob/main/assets/download_button.svg"  alt="Download amy-tts" width="350px" style="padding-top: 15px;"></a>
+  <img src="https://github.com/sweetbbak/moe-flatpaks/blob/main/assets/download_button.svg"  alt="Download amy-tts" width="350px" style="padding-top: 15px;">
+  </a>
 </h1>
 <p align="center">
   <a href="https://github.com/sweetbbak/moe-flatpaks/releases">
