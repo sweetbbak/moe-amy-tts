@@ -15,47 +15,34 @@ modules:
         url: https://github.com/rhasspy/piper/releases/download/v1.2.0/piper_amd64.tar.gz
         sha256: 467c17935d2a22dcce9dc9e08ba07485e29be813097e7cf08c5627aa09d32e42
 
-  - name: amy
-    sources:
-    - type: file
-      path: moe.amy.tts.png
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/share/icons/hicolor/256x256/apps/
-      - mkdir -p /app/share/icons/hicolor/128x128/apps/
-
-      - install -Dm644 moe.amy.tts.png /app/share/icons/hicolor/256x256/apps/moe.amy.tts.png
-      - install -Dm644 moe.amy.tts.png /app/share/icons/hicolor/128x128/apps/moe.amy.tts.png"
-  #     # - install -m644 moe.amy.tts.png /usr/share/icons/hicolor/256x256/apps/moe.amy.tts.png
-  #     - ls -R
-  #     - install -Dm644 moe.amy.tts.desktop "${FLATPAK_DEST}/share/applications/"
-  #     - install -Dm644 moe.amy.tts.metainfo.xml "${FLATPAK_DEST}/share/metainfo/"
-  #     - install -Dm644 moe.amy.tts.png "${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/moe.amy.tts.png"
+  # - name: metainfo
   #   sources:
-  #     - type: file
-  #     - path: moe.amy.tts.desktop
-  #     - type: file
-  #     - path: moe.amy.tts.metainfo.xml
-  #     - type: file
-  #     - path: moe.amy.tts.png
-
-  - name: metainfo
-    sources:
-    - type: file
-      path: moe.amy.tts.metainfo.xml
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/share/metainfo
-      - install -m644 moe.amy.tts.metainfo.xml  /app/share/metainfo/moe.amy.tts.metainfo.xml
+  #   - type: file
+  #     path: moe.amy.tts.metainfo.xml
+  #   - type: file
+  #     path: moe.amy.tts.desktop
+  #   - type: file
+  #     path: moe.amy.tts.png
+  #   buildsystem: simple
+  #   build-commands:
+  #     - mkdir -p /app/share/metainfo
+  #     - mkdir -p /app/share/applications
+  #     - mkdir -p /app/share/icons/hicolor/128x128/app
+  #     - install -m644 moe.amy.tts.metainfo.xml  /app/share/metainfo/moe.amy.tts.metainfo.xml
+  #     - install -m644 moe.amy.tts.desktop /app/share/applications
+  #     - install -m644 moe.amy.tts.png /app/share/icons/hicolor/128x128/app
 
   - name: desktop
     sources:
     - type: file
       path: moe.amy.tts.desktop
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/share/applications
-      - install -m755 amy.desktop /app/share/applications
+    - type: file
+      path: moe.amy.tts.png
+  #   buildsystem: simple
+  #   build-commands:
+  #     - mkdir -p /app/share/applications
+  #     - install -m755 moe.amy.tts.desktop /app/share/applications
+  #     # - install -m755 moe.amy.tts.png /app/share/icons/hicolor/128x128/app
 
   - name: run.sh
     sources:

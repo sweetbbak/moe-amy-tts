@@ -6,6 +6,6 @@ Name=Amy Text-to-speech
 Comment=Amy TTS is a text-to-speech engine that runs using minimal CPU power but doesn't sacrifice on 
 Categories=Utility;Accessibility;
 
-Icon=/app/share/icons/hicolor/128x128/apps/moe.amy.tts.png
+Icon=moe.amy.tts
 Exec=moe.amy.tts --gui
 Terminal=false
