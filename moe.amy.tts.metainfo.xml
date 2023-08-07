@@ -3,7 +3,7 @@
   <id>moe.amy.tts</id>
   
   <name>Amy Text-to-speech</name>
-  <summary>Amy TTS is a text-to-speech engine that runs using minimal CPU power but doesn&apos;t sacrifice on </summary>
+  <summary>Amy TTS is a text-to-speech engine that runs using minimal CPU power but doesnt sacrifice on quality </summary>
   
   <metadata_license>FSFAP</metadata_license>
   <project_license>MIT</project_license>
