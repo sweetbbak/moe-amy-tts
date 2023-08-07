@@ -3,7 +3,7 @@
 ![](moe.amy.tts.png)
 
 <h1 align="center">
-  <a name="logo" href="moe.any.tts.png"><img src="moe.any.tts.png" alt="Amy text to speech logo" width="200"></a>
+  <a name="logo" href=""><img src="moe.amy.tts.png" alt="Amy text to speech logo" width="200"></a>
   <br>
   Amy Text-to-speech
   <br>
