@@ -4,9 +4,13 @@ runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: run.sh
 modules:
+
+  - modules/yad.yml
+
   - name: piper
     buildsystem: simple
     build-commands:
+      - mv * /app/
       - mkdir -p /app/bin
       - ln -s /app/piper /app/bin/piper
     sources:
