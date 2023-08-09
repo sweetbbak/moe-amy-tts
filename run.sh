@@ -68,6 +68,11 @@ file_dialogue() {
     
 }
 
+if [ $# -eq 0 ]; then
+    dialogue
+    exit
+fi
+
 while [ $# -gt 0 ]; do
     case "$1" in
         -h|--help) ;;
@@ -82,3 +87,4 @@ while [ $# -gt 0 ]; do
     esac
     shift
 done
+
