@@ -1,9 +1,8 @@
 [Desktop Entry]
-Version=0.3.0
 Type=Application
 Name=Amy Text-to-speech
 Comment=Amy TTS is a text-to-speech engine that runs using minimal CPU power but doesn't sacrifice on quality and ease. 
 Categories=Utility;Accessibility;
 Icon=moe.amy.tts
-Exec=moe.amy.tts --gui
+Exec=moe.amy.tts
 Terminal=false

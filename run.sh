@@ -77,7 +77,7 @@ while [ $# -gt 0 ]; do
         -t|--text) shift && tts "${@}" ; exit 0 ;;
         -g|--gui) dialogue ;;
         -o|--output) shift && tts2file "${1}" "${2}" ;;
-        *) ;;
+        *) dialogue ;;
 
     esac
     shift
