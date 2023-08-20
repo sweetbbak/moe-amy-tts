@@ -43,7 +43,7 @@ Its great for using with bash scripts, accessibility, listening to articles or t
 1. Drag the file onto your desktop and double click it to run it.
 1. Open the Return to Gaming Mode shortcut on your desktop.
 
-- There is also a fast install for those who can use Konsole. Run `curl -L https://github.com/sweetbbak/amy-installer/releases/latest/download/install_release.sh | sh`
+- There is also a fast install for those who can use Konsole. Run `curl -L https://raw.githubusercontent.com/sweetbbak/moe-amy-tts/main/gui/user_install_script.sh | sh`
 
 ## 📜 Credits
 
