@@ -39,7 +39,7 @@ Its great for using with bash scripts, accessibility, listening to articles or t
 ## Installation
 
 1. Navigate to this Github page on a browser of your choice.
-1. Download the [installer file](https://github.com/sweetbbak/moe-flatpaks/releases/latest/download/amy_installer.desktop). (If using firefox, it will be named `amy_installer.desktop.download`. Rename it to `amy_installer.desktop` before running it)
+1. Download the [installer file](https://raw.githubusercontent.com/sweetbbak/moe-amy-tts/main/gui/amy_installer.desktop). (If using firefox, it will be named `amy_installer.desktop.download`. Rename it to `amy_installer.desktop` before running it)
 1. Drag the file onto your desktop and double click it to run it.
 1. Open the Return to Gaming Mode shortcut on your desktop.
 
