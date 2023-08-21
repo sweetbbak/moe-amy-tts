@@ -1,3 +1,4 @@
+#!/bin/env python3
 import customtkinter as ctk
 from PIL import Image
 import os
@@ -37,8 +38,8 @@ amyf = TTS_Model(
     config="/app/ivona/amy.onnx.json",
 )
 
-model = amy.model
-config = amy.config
+model = amyf.model
+config = amyf.config
 
 
 def start_daemon():
