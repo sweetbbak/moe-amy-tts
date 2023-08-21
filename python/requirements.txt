@@ -1,3 +1,5 @@
-customtkinter
-Pillow
-PyAudio
+customtkinter==5.2.0
+Pillow==10.0.0
+piper-phonemize==1.0.0
+piper-tts==1.1.0
+PyAudio==0.2.13

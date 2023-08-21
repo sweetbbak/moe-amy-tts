@@ -1,0 +1,20 @@
+{
+  "name": "python3-package-installation",
+  "buildsystem": "simple",
+  "build-commands": [
+    "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation piper-phonemize piper-tts"
+  ],
+  "sources": [
+    {
+      "type": "file",
+      "url": "https://files.pythonhosted.org/packages/21/7e/531eaccb5794681c262d71f1d1017a24b37077154e3b02dd7eb883ea4fcf/piper_phonemize-1.0.0-cp39-cp39-manylinux_2_28_x86_64.whl",
+      "sha256": "241c30a59ba8f4a788bf9acc40899fac4bbaf9f21428266c5de925911768a077",
+      "only-arches": ["x86_64"]
+    },
+    {
+      "type": "file",
+      "url": "https://files.pythonhosted.org/packages/2e/1c/cc3a342db7f03053eca4fa5b05362178a5a796115770b216740b733b24d7/piper_tts-1.1.0-py3-none-any.whl",
+      "sha256": "743c63bb2fe95b6f696d3e15b1250f7f38760dc904ede8ef9428df4bd13ef466"
+    }
+  ]
+}

@@ -2,7 +2,6 @@
 import customtkinter as ctk
 from PIL import Image
 import os
-import atexit
 from piper import PiperVoice
 import sys
 import pyaudio
@@ -46,10 +45,10 @@ def start_daemon():
     os.system("source .venv/bin/activate && python3 ivona.py &")
 
 
-@atexit.register
-def cleanup():
-    with open("pipe", "w") as fifo:
-        fifo.write("SIGEXIT9")
+# @atexit.register
+# def cleanup():
+#     with open("pipe", "w") as fifo:
+#         fifo.write("SIGEXIT9")
 
 
 def start_tts(data, trate):

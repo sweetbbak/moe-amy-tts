@@ -5,18 +5,27 @@ sdk: org.freedesktop.Sdk
 command: gui.py
 modules:
 
-  - modules/yad.yml
+  - pypix-dependencies.json
 
-  - name: piper
+  - name: pip-installs
     buildsystem: simple
-    build-commands:
-      - mv * /app/
-      - mkdir -p /app/bin
-      - ln -s /app/piper /app/bin/piper
     sources:
-      - type: archive
-        url: https://github.com/rhasspy/piper/releases/download/v1.2.0/piper_amd64.tar.gz
-        sha256: 467c17935d2a22dcce9dc9e08ba07485e29be813097e7cf08c5627aa09d32e42
+      - type: file
+        path: piper_tts-1.2.0-py3-none-any.whl
+        url: https://files.pythonhosted.org/packages/24/aa/215bced0725cf5b5afe939f86b177c8ddb0d38292a94e85c55b3fcf6d46d/piper_tts-1.2.0-py3-none-any.whl
+        sha256: f3410aea0f8051d8a118050a5b954faeb36f6ac0da6d10fc2f8a043a8eaf27b5
+
+      - type: file
+        path: piper_phonemize-1.1.0-cp311-cp311-manylinux_2_28_x86_64.whl
+        url: https://files.pythonhosted.org/packages/b8/b7/a8fc2584d509ca36d5713693d675a88f80e4c3725e16a8c7ff1451f0ba99/piper_phonemize-1.1.0-cp311-cp311-manylinux_2_28_x86_64.whl
+        sha256: c1062e00c94835e9115df7ce1d7b3b5c40c6d845cd70b2c121954faf5b8d23c7
+
+    build-options:
+      - build-args:
+        - --share=network
+    build-commands:
+      # - pip3.10 install --no-index --prefix=${FLATPAK_DEST} --no-build-isolation -r piper-tts
+      - pip3.10 install --no-index --prefix=${FLATPAK_DEST} --no-build-isolation -r piper_tts-1.2.0-py3-none-any.whl
 
   - name: desktop
     sources:
@@ -32,19 +41,17 @@ modules:
     sources:
     - type: file
       path: amy.png
-    - type: file
-      path: moe.amy.tts.png
     buildsystem: simple
     build-commands:
       - install -Dm644 amy.png /app/share/icons/hicolor/128x128/app/moe.amy.tts.png
 
-  - name: run.sh
-    sources:
-    - type: file
-      path: run.sh
-    buildsystem: simple
-    build-commands:
-      - install -Dm755 run.sh /app/bin/run.sh
+  # - name: run.sh
+  #   sources:
+  #   - type: file
+  #     path: run.sh
+  #   buildsystem: simple
+  #   build-commands:
+  #     - install -Dm755 run.sh /app/bin/run.sh
 
   - name: ivona
     sources:
@@ -72,6 +79,4 @@ finish-args:
   - --socket=x11
   - --socket=pulseaudio
   - --socket=wayland
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-music
+  - --filesystem=home
