@@ -229,8 +229,6 @@ class GUI(ctk.CTk):
             hover_color=HOVER_COLOR,
             text="Speak",
             text_color=TEXT_COLOR,
-            # command=self.speakit(self.url_entr.get("0.0", END)),
-            # command=lambda: asyncio.run(start_tts(self.url_entr.get("0.0", "end"))),
             command=self.speakit,
         )
         self.synth_button.place(x=700, y=350)
@@ -260,10 +258,7 @@ class GUI(ctk.CTk):
         return "".join(char for char in text if 31 < ord(char) < 127 or char in "\n\r")
 
     def speakit(self):
-        # os.system(f"echo {text} | piper-tts --model /home/sweet/ssd/ivona_tts/amy.onnx")
-        # text = self.url_entr.get("0.0", END)
         global STOP
-        # text = self.url_entr.get("0.0", "end-1c")
         text = self.url_entr.get("0.0", "end")
         if text == "":
             return
@@ -288,8 +283,7 @@ class GUI(ctk.CTk):
             #         # fifo.writelines(line)
 
     def stopit(self):
-        global STOP
-        STOP = True
+        Process.pool.terminate()
 
     def download(self):
         self.url_entry.get()
