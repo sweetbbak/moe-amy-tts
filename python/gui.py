@@ -8,7 +8,9 @@ from pathlib import Path
 import pyaudio
 import asyncio
 import threading
+import multiprocessing as mp
 from multiprocessing import Process
+from multiprocessing.pool import ThreadPool
 
 BORDER_COLOR = "#ED2553"
 ENTRY_COLOR = "#1F1F1F"
@@ -65,9 +67,6 @@ def init_load():
 def start_tts(data):
     p = pyaudio.PyAudio()
     voice = PiperVoice.load(model)
-    print(p)
-    print(model)
-    print(data)
 
     stream = p.open(
         format=pyaudio.paInt16,
@@ -93,6 +92,7 @@ class GUI(ctk.CTk):
     def __init__(self):
         ctk.set_appearance_mode("Dark")
         super().__init__()
+        self.queue = mp.Queue()
         self.path = ctk.StringVar()
         self.threads = ctk.IntVar()
 
@@ -267,8 +267,13 @@ class GUI(ctk.CTk):
                 char for char in text if 31 < ord(char) < 127 or char in "\n\r"
             )
 
-            Process(target=lambda: start_tts(text)).start()
+            p = mp.Process(target=lambda: start_tts(text))
+            p.daemon = True
+            p.start()
+            # pool = ThreadPool(processes=1)
+            # pool.apply_async(start_tts, args=(text))
 
+            """
             # with open("pipe", "w") as fifo:
             #     for line in text.splitlines():
             #         print("----x-----")
@@ -281,9 +286,19 @@ class GUI(ctk.CTk):
             #     with open("pipe", "w") as fifo:
             #         fifo.write(line)
             #         # fifo.writelines(line)
+            """
 
     def stopit(self):
-        Process.pool.terminate()
+        global STOP
+        STOP = True
+        # ThreadPool.terminate()
+        # Process.terminate(self)
+        # Process.terminate()
+        # Process.join()
+        for prc in mp.active_children():
+            prc.terminate()
+            prc.join()
+        # p.join()
 
     def download(self):
         self.url_entry.get()
@@ -297,9 +312,6 @@ class GUI(ctk.CTk):
         print(file)
         with open(file, "r", encoding="UTF-8") as f:
             text = f.read()
-        print(text)
-        print("-------------")
-        # text = "test text"
         self.url_entr.delete("0.0", "end-1c")
         self.url_entr.insert("0.0", text)
 
@@ -311,5 +323,5 @@ class GUI(ctk.CTk):
 
 
 app = GUI()
-start_daemon()
+# start_daemon()
 app.mainloop()
