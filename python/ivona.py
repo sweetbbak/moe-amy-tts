@@ -54,6 +54,16 @@ def cleanup():
         os.remove(pipe)
 
 
+def writetopipe(text):
+    if text == "":
+        return
+    else:
+        text = "".join(char for char in text if 31 < ord(char) < 127 or char in "\n\r")
+
+    with open("pipe", "w") as fifo:
+        fifo.write(text)
+
+
 def daemon():
     voice = PiperVoice.load(model)
     p = pyaudio.PyAudio()

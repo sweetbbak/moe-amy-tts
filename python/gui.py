@@ -4,13 +4,8 @@ import os
 import atexit
 from piper import PiperVoice
 import sys
-from pathlib import Path
 import pyaudio
-import asyncio
-import threading
 import multiprocessing as mp
-from multiprocessing import Process
-from multiprocessing.pool import ThreadPool
 
 BORDER_COLOR = "#ED2553"
 ENTRY_COLOR = "#1F1F1F"
@@ -56,15 +51,30 @@ def cleanup():
         fifo.write("SIGEXIT9")
 
 
-def test():
-    print("OUTSIDE CLASS")
+def start_tts(data, trate):
+    print(trate)
+    match trate:
+        case [
+            "1x",
+            *_,
+        ]:
+            trate = 0.5
+        case [
+            "1.25x",
+            *_,
+        ]:
+            trate = 0.5
+        case [
+            "1.5x",
+            *_,
+        ]:
+            trate = 0.5
+        case [
+            "2x",
+            *_,
+        ]:
+            trate = 0.5
 
-
-def init_load():
-    pass
-
-
-def start_tts(data):
     p = pyaudio.PyAudio()
     voice = PiperVoice.load(model)
 
@@ -200,13 +210,13 @@ class GUI(ctk.CTk):
         )
         self.voice_button.place(x=85, y=350)
 
-        self.voice_button = ctk.CTkComboBox(
+        self.rate_button = ctk.CTkComboBox(
             self,
             width=170,
             height=30,
             values=["1x speed", "1.25x speed", "1.5x speed", "2x speed"],
         )
-        self.voice_button.place(x=85, y=390)
+        self.rate_button.place(x=85, y=390)
 
         self.clear_button = ctk.CTkButton(
             self,
@@ -217,7 +227,6 @@ class GUI(ctk.CTk):
             text="Clear",
             text_color=TEXT_COLOR,
             command=self.clear,
-            # command=test,
         )
         self.clear_button.place(x=500, y=350)
 
@@ -258,8 +267,9 @@ class GUI(ctk.CTk):
         return "".join(char for char in text if 31 < ord(char) < 127 or char in "\n\r")
 
     def speakit(self):
-        global STOP
         text = self.url_entr.get("0.0", "end")
+        rate = self.rate_button.get()
+
         if text == "":
             return
         else:
@@ -267,38 +277,16 @@ class GUI(ctk.CTk):
                 char for char in text if 31 < ord(char) < 127 or char in "\n\r"
             )
 
-            p = mp.Process(target=lambda: start_tts(text))
+            p = mp.Process(target=lambda: start_tts(text, rate))
             p.daemon = True
             p.start()
-            # pool = ThreadPool(processes=1)
-            # pool.apply_async(start_tts, args=(text))
-
-            """
-            # with open("pipe", "w") as fifo:
-            #     for line in text.splitlines():
-            #         print("----x-----")
-            #         print(line)
-            #         fifo.write(line)
-            #         print("----x----")
-            # if STOP is True:
-            #     break
-            # else:
-            #     with open("pipe", "w") as fifo:
-            #         fifo.write(line)
-            #         # fifo.writelines(line)
-            """
 
     def stopit(self):
         global STOP
         STOP = True
-        # ThreadPool.terminate()
-        # Process.terminate(self)
-        # Process.terminate()
-        # Process.join()
         for prc in mp.active_children():
             prc.terminate()
             prc.join()
-        # p.join()
 
     def download(self):
         self.url_entry.get()
@@ -314,9 +302,6 @@ class GUI(ctk.CTk):
             text = f.read()
         self.url_entr.delete("0.0", "end-1c")
         self.url_entr.insert("0.0", text)
-
-    # def change_thread(self):
-    #     self.update_userSetting("Parallelism", self.threads.get())
 
     def update_userAgent(self):
         pass
