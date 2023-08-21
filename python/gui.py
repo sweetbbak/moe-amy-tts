@@ -1,19 +1,13 @@
 import customtkinter as ctk
-
-# from customtkinter import END
-import piper
 from PIL import Image
 import os
+import atexit
 
-voice = piper.PiperVoice
-voice.load("/home/sweet/ssd/ivona_tts/amy.onnx")
-# synthesize_args = {
-#     "speaker_id": args.speaker,
-#     "length_scale": args.length_scale,
-#     "noise_scale": args.noise_scale,
-#     "noise_w": args.noise_w,
-#     "sentence_silence": args.sentence_silence,
-# }
+# import ivona
+
+
+# from ivona import daemon
+
 
 BORDER_COLOR = "#ED2553"
 ENTRY_COLOR = "#1F1F1F"
@@ -25,6 +19,16 @@ SUCCESS_COLOR = "#34eb46"
 
 WIDTH, HEIGHT = 1750, 950
 DIRPATH = os.path.join(os.path.dirname(__file__))
+
+
+def start_daemon():
+    os.system("source .venv/bin/activate && python3 ivona.py &")
+
+
+@atexit.register
+def cleanup():
+    with open("pipe", "w") as fifo:
+        fifo.write("SIGEXIT9")
 
 
 class GUI(ctk.CTk):
@@ -204,8 +208,11 @@ class GUI(ctk.CTk):
             text = "".join(
                 char for char in text if 31 < ord(char) < 127 or char in "\n\r"
             )
-            os.system(f"../dev.sh -t '{text}'")
-            os.system(f"echo 'init - {text}'")
+            # os.system(f"../dev.sh -t '{text}'")
+            # os.system(f"echo 'init - {text}'")
+
+            with open("pipe", "w") as fifo:
+                fifo.write(text)
 
     def download(self):
         self.url_entry.get()
@@ -233,4 +240,5 @@ class GUI(ctk.CTk):
 
 
 app = GUI()
+start_daemon()
 app.mainloop()
