@@ -2,12 +2,13 @@ import customtkinter as ctk
 from PIL import Image
 import os
 import atexit
-
-# import ivona
-
-
-# from ivona import daemon
-
+from piper import PiperVoice
+import sys
+from pathlib import Path
+import pyaudio
+import asyncio
+import threading
+from multiprocessing import Process
 
 BORDER_COLOR = "#ED2553"
 ENTRY_COLOR = "#1F1F1F"
@@ -17,8 +18,30 @@ HOVER_COLOR = "#762739"
 FRAME_COLOR = "#292424"
 SUCCESS_COLOR = "#34eb46"
 
+STOP = False
+
 WIDTH, HEIGHT = 1750, 950
 DIRPATH = os.path.join(os.path.dirname(__file__))
+
+
+class TTS_Model:
+    def __init__(self, model, config):
+        self.model = model
+        self.config = config
+
+
+amy = TTS_Model(
+    model="/home/sweet/ssd/ivona_tts/amy.onnx",
+    config="/home/sweet/ssd/ivona_tts/amy.onnx.json",
+)
+
+amyf = TTS_Model(
+    model="/app/ivona/amy.onnx",
+    config="/app/ivona/amy.onnx.json",
+)
+
+model = amy.model
+config = amy.config
 
 
 def start_daemon():
@@ -29,6 +52,41 @@ def start_daemon():
 def cleanup():
     with open("pipe", "w") as fifo:
         fifo.write("SIGEXIT9")
+
+
+def test():
+    print("OUTSIDE CLASS")
+
+
+def init_load():
+    pass
+
+
+def start_tts(data):
+    p = pyaudio.PyAudio()
+    voice = PiperVoice.load(model)
+    print(p)
+    print(model)
+    print(data)
+
+    stream = p.open(
+        format=pyaudio.paInt16,
+        channels=1,
+        rate=22050,
+        output=True,
+        frames_per_buffer=1024,
+    )
+
+    audio_stream = voice.synthesize_stream_raw(data)
+    for audio_bytes in audio_stream:
+        stream.write(audio_bytes)
+
+    sys.stdin.flush()
+
+    stream.stop_stream()
+    stream.close()
+
+    p.terminate()
 
 
 class GUI(ctk.CTk):
@@ -159,6 +217,7 @@ class GUI(ctk.CTk):
             text="Clear",
             text_color=TEXT_COLOR,
             command=self.clear,
+            # command=test,
         )
         self.clear_button.place(x=500, y=350)
 
@@ -171,6 +230,7 @@ class GUI(ctk.CTk):
             text="Speak",
             text_color=TEXT_COLOR,
             # command=self.speakit(self.url_entr.get("0.0", END)),
+            # command=lambda: asyncio.run(start_tts(self.url_entr.get("0.0", "end"))),
             command=self.speakit,
         )
         self.synth_button.place(x=700, y=350)
@@ -183,6 +243,7 @@ class GUI(ctk.CTk):
             hover_color=HOVER_COLOR,
             text="Stop",
             text_color=TEXT_COLOR,
+            command=self.stopit,
         )
         self.stop_button.place(x=700, y=390)
 
@@ -201,18 +262,34 @@ class GUI(ctk.CTk):
     def speakit(self):
         # os.system(f"echo {text} | piper-tts --model /home/sweet/ssd/ivona_tts/amy.onnx")
         # text = self.url_entr.get("0.0", END)
-        text = self.url_entr.get("0.0", "end-1c")
+        global STOP
+        # text = self.url_entr.get("0.0", "end-1c")
+        text = self.url_entr.get("0.0", "end")
         if text == "":
             return
         else:
             text = "".join(
                 char for char in text if 31 < ord(char) < 127 or char in "\n\r"
             )
-            # os.system(f"../dev.sh -t '{text}'")
-            # os.system(f"echo 'init - {text}'")
 
-            with open("pipe", "w") as fifo:
-                fifo.write(text)
+            Process(target=lambda: start_tts(text)).start()
+
+            # with open("pipe", "w") as fifo:
+            #     for line in text.splitlines():
+            #         print("----x-----")
+            #         print(line)
+            #         fifo.write(line)
+            #         print("----x----")
+            # if STOP is True:
+            #     break
+            # else:
+            #     with open("pipe", "w") as fifo:
+            #         fifo.write(line)
+            #         # fifo.writelines(line)
+
+    def stopit(self):
+        global STOP
+        STOP = True
 
     def download(self):
         self.url_entry.get()

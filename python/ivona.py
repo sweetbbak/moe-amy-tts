@@ -1,4 +1,7 @@
 #!/bin/env python3
+# This script is an audio "daemon" that loads
+# the piper-tts voice and waits for text input
+# from a named pipe
 from piper import PiperVoice
 import sys
 from pathlib import Path
@@ -18,13 +21,21 @@ amy = TTS_Model(
     config="/home/sweet/ssd/ivona_tts/amy.onnx.json",
 )
 
+amyf = TTS_Model(
+    model="/app/ivona/amy.onnx",
+    config="/app/ivona/amy.onnx.json",
+)
+
 emma = TTS_Model(
     model="/home/sweet/ssd/amy++/amy.onnx",
     config="/home/sweet/ssd/amy++/amy.onnx.json",
 )
 
+# model = amy.model
+# config = amy.config
 model = amy.model
 config = amy.config
+
 pipe = os.path.join(os.getcwd(), "pipe")
 pipe = Path(pipe)
 
