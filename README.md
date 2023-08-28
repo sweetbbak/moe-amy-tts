@@ -23,6 +23,8 @@
 
 ## 📖 About
 
+!()[assets/screenshot3.png]
+
 Amy TTS is a text-to-speech engine that runs using minimal CPU power but doesnt sacrifice on quality
 Amy can easily run on a raspberry Pi and the steam deck with faster than real time speech generation.
 

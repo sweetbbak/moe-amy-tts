@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "moe-amy"
+version = "0.1.0"
+description = "TTS reader"
+authors = ["sweetbbak <sweetbabyalaska@gmail.com>"]
+readme = "README.md"
+packages = [{include = "moe_amy"}]
+
+[tool.poetry.dependencies]
+python = "3.10.12"
+piper-tts = "^1.2.0"
+PyAudio = "^0.2.13"
+customtkinter = "^5.2.0"
+pillow = "^10.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
