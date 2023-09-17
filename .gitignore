@@ -3,3 +3,8 @@ ignore
 repo
 build-dir
 build
+Amy_TTS-x86_64.AppImage
+build-dir
+build-dir
+build
+ignore
